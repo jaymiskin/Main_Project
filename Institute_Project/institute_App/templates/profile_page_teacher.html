@@ -272,7 +272,8 @@
 
 
                 <li>
-                    <a href="{% url 'club_page' %}"><i class="fas fa-calendar-day"></i> <span>Club's</span></a>
+                    <a href="{% url 'club_page' %}"><i class="bi bi-balloon-fill" style="font-size: 22px; margin-left: -5px;"></i> <span style="padding-left: 5px;">Club's</span></a>
+
                 </li>
                 
               
@@ -336,6 +337,7 @@
                             
                         </ul>
                         <div class="tab-content">
+
                             <div class="tab-pane active" id="basic-justified-tab1">
                                 <form action="{% url 'profile_update_teacher' %}" method="post">
                                     {% csrf_token %}
@@ -414,6 +416,7 @@
                                     </div>
                                 </form>
                             </div>
+                            
                             <div class="tab-pane " id="basic-justified-tab2">
                                 <form action="{% url 'password_reset' %}" method="post">
                                     {% csrf_token %}

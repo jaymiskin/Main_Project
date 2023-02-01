@@ -65,7 +65,8 @@ def club_page(request):
 
 
 def event_page(request):
-    event_data(request) #load event data
+    
+    (request) #load event data
     return render(request,'event_page.html', data)
     
 def department_page(request):
