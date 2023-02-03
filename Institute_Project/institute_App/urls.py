@@ -13,10 +13,7 @@ urlpatterns = [
     path('profile_page_teacher/',profile_page_teacher,name='profile_page_teacher'),
     path('student_page/',student_page,name='student_page'),
     path('teacher_page/',teacher_page,name='teacher_page'),
-    # path('club_page/',club_page,name='club_page'),
     path('book_page/',book_page,name='book_page'),
-    # path('add_book_page/',add_book_page,name='add_book_page'),
-    # path('club_page_data/',club_page_data,name='club_page_data'),
 
     path('add_club_page/',add_club_page,name='add_club_page'),
     path('add_club/',add_club,name='add_club'),
@@ -25,6 +22,8 @@ urlpatterns = [
 
     path('department_page/',department_page,name='department_page'),
     path('event_page/',event_page,name='event_page'),
+
+    path('maintenance_page/',maintenance_page,name='maintenance_page'),
 
 
 

@@ -23,6 +23,9 @@ def forgot_pwd_page(request):
 def otp_page(request):
     return render(request,'otp_page.html')
 
+def maintenance_page(request):
+    return render(request,'maintenance_page.html')
+
 def profile_page_teacher(request):
     return render (request,'profile_page_teacher.html',data)
 
@@ -365,7 +368,7 @@ def update_profile_function(request):
     common.Address = request.POST['address']
 
     common.save()
-    return redirect(signin_page)
+    return redirect(profile_page)
 
 
 
