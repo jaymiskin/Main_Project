@@ -69,7 +69,7 @@ def club_page(request):
 
 def event_page(request):
     
-    (request) #load event data
+    event_data(request) #load event data
     return render(request,'event_page.html', data)
     
 def department_page(request):
@@ -418,7 +418,7 @@ def add_event(request):
         )
 
     print('successfully')
-    return redirect(event_page)
+    return redirect(index)
 
 
 # Add data
