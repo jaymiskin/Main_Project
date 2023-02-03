@@ -29,6 +29,15 @@
     padding: 0.475rem 0.900rem;
     }
 
+
+    .alert {
+    position: relative;
+    padding: 1rem 2.25rem !important;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    }
+
 </style>
 
 
@@ -175,6 +184,8 @@
                         alt="Ryan Taylor">
                     <div class="user-text">
                         <h6>{{user_data.first_name}} {{user_data.last_name}}</h6>
+                        <p class="text-muted mb-0">Teacher</p>
+
                     </div>
                 </span>
             </a>
@@ -186,6 +197,7 @@
                     </div>
                     <div class="user-text">
                         <h6 style="margin-top: 10px;">{{user_data.first_name}} {{user_data.last_name}}</h6>
+                        <p class="text-muted mb-0">Teacher</p>
                     </div>
                 </div>
                 <a class="dropdown-item" href="{% url 'profile_page' %}">My Profile</a>
@@ -283,6 +295,13 @@
 
 
 <div class="page-wrapper mt-0">
+
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        <center><strong>Teacher Account</strong></center>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+
     <div class="content container-fluid">
         <div class="row">
             <div class="col-sm-12">

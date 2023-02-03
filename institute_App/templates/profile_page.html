@@ -2,26 +2,6 @@
 {% load static %}
 {% block main_content %}
 
-<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this imaginary file!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => { 
-            if (willDelete) {
-                swal("Poof! Your imaginary file has been deleted!", {
-                icon: "success",
-                });
-            } else {
-                swal("Your imaginary file is safe!");
-            }
-            });
-    </script> -->
-
 <style>
     .nishad {
         color: white;
@@ -48,6 +28,14 @@
     padding: 0.475rem 0.900rem;
     }
 
+
+    .alert {
+    position: relative;
+    padding: 1rem 2.25rem !important;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    }
 </style>
 
 
@@ -193,6 +181,7 @@
                         alt="Ryan Taylor">
                     <div class="user-text">
                         <h6>{{user_data.first_name}} {{user_data.last_name}}</h6>
+                        <p class="text-muted mb-0">Student</p>
                     </div>
                 </span>
             </a>
@@ -204,6 +193,7 @@
                     </div>
                     <div class="user-text">
                         <h6 style="margin-top: 10px;">{{user_data.first_name}} {{user_data.last_name}}</h6>
+                        <p class="text-muted mb-0">Student</p>
                     </div>
                 </div>
                 <a class="dropdown-item" href="{% url 'profile_page' %}">My Profile</a>
@@ -251,6 +241,7 @@
                     <a href="{% url 'department_page' %}"><i class="fas fa-building"></i> <span> Departments List</span></a>
                 </li>
                 
+                </li>
                 <li>
                     <a href="{% url 'maintenance_page' %}"><i class="fas fa-file-invoice-dollar"></i> <span> Campus</span></a>
                 </li>
@@ -299,7 +290,18 @@
 </div>
 
 
+
 <div class="page-wrapper">
+ 
+
+
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        <center><strong>Student Account</strong></center>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+    
+
         <div class="content container-fluid">
         
         <div class="page-header">
