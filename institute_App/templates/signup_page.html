@@ -6,6 +6,13 @@
     input[type=radio]#Red {
             accent-color: #FF0000;
     }
+    h3 {
+    color: #e04545;
+    margin-top: -20px;
+    font-size: 15px;
+    margin-bottom: 12px;
+    text-align: center;
+    }
 </style>
 
 <div class="main-wrapper login-body">
@@ -20,6 +27,12 @@
                         <h1>Sign Up</h1>
                         <p class="account-subtitle">Enter details to create your account</p>
 
+
+                        {% if error %}
+                        <h3>{{ error }}</h3>
+                        {% endif %}
+
+                        
                         <form method="post" action="{% url 'signup' %}">
                             {% csrf_token %}
                             <div class="row">

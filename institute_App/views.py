@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse  
 from .models import *
 from django.conf import settings
 from django.core.mail import send_mail
 from django.db.utils import IntegrityError
 from random import randint
 import os
+  
+  
+
 
 # Create your views here.
 data={}
@@ -121,9 +125,11 @@ def signup(request):
     password = request.POST['password']
     if password == request.POST['confirm_password']:
         master = Master.objects.create(Email = request.POST['email'],Password = password)
+
         role=Role.objects.create(Role_Type = request.POST['role_type'])
         common=Common.objects.create(Master = master)
         print('Signup successfully.')
+
         if role.Role_Type == 'student':
             print('Student')
             Student.objects.create(Common=common)
@@ -131,8 +137,8 @@ def signup(request):
             print('teacher')
             Teacher.objects.create(Common=common)
     else:
-        print('both password should be same.')
-        return redirect(signup_page)
+        return render(request, "signup_page.html",{'error':"Password does not match"})
+        # return redirect(signup_page)
 
     return redirect(signin_page)
 
@@ -352,7 +358,8 @@ def delete_account_function(request):
     print(request.POST)
     master=Master.objects.get(Email = request.session['email'])
     master.delete()
-    return redirect(signup_page)    
+    return redirect(signup_page) 
+   
 
 
 
@@ -426,3 +433,15 @@ def event_data(request):
     # print(request.POST)
     event = Event.objects.all()
     data['event'] = event
+
+
+# def mail(request):  
+#     subject = "Greetings"  
+#     msg     = "Congratulations for your success"  
+#     to      = "irfan.sssit@gmail.com"  
+#     res     = send_mail(subject, msg, settings.EMAIL_HOST_USER, [to])  
+#     if(res == 1):  
+#         msg = "Mail Sent Successfuly"  
+#     else:  
+#         msg = "Mail could not sent"  
+#     return HttpResponse(msg)  

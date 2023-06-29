@@ -65,6 +65,6 @@ urlpatterns = [
     path('department_data/',department_data,name='department_data'),
 
 
-
+    # path('mail',mail,name='mail') 
 
 ]

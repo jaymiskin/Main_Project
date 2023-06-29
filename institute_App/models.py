@@ -31,7 +31,7 @@ class Master(models.Model):
 
 class Common(models.Model):
     Master=models.ForeignKey(Master, on_delete=models.CASCADE)
-
+                                                                               
     Name=models.CharField(max_length=50)
     DateOfBirth=models.DateField(default='2022-11-21')
     DateOfJoining=models.DateField(default='2022-11-21')
