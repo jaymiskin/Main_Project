@@ -320,34 +320,6 @@ def create_pwd(request):
      else:
              return render(request,'create_pwd.html')
 
-# OTP Creation
-# def otp_creation(request):
-#     otp_number = randint(1000, 9999)
-#     print("OTP is: ", otp_number)
-#     request.session['otp'] = otp_number
-#     return otp_number
-
-
-#otp send
-# def otp_send(request):    
-#     if request.session['otp'] == int(request.POST['otp']):
-#         print('otp match')
-#         master = Master.objects.get(Email = request.session['email'])
-#         if request.POST['new_password'] == request.POST['confirm_password']:
-#             master.Password = request.POST['new_password']
-#             print('password change successfully')
-#             master.save()
-#             return redirect('signin_page')
-#         else:
-#             print('New Password & Confirm Password Does not Matched.')
-#             return redirect(forgot_pwd_page)
-#     else:
-#         print('Wrong OTP')
-#         return redirect(otp_page)
-    
-    # return redirect(signin_page)
-
-
 # profile_update_teacher
 def profile_data_2(request):
     master = Master.objects.get(Email = request.session['email'])

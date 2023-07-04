@@ -20,8 +20,6 @@ urlpatterns = [
     path('update_profile_page/',update_profile_page,name='update_profile_page'),
     path('department_page/',department_page,name='department_page'),
     path('event_page/',event_page,name='event_page'),
-
-
     path('create_pwd/',create_pwd,name='create_pwd'),
 
 
@@ -34,12 +32,9 @@ urlpatterns = [
     path('logout/', logout, name='logout'),
     path('signup/', signup, name='signup'),
     path('signin/', signin, name='signin'),
-    # path('otp_creation/', otp_creation, name='otp_creation'),
-    # path('otp_send/', otp_send, name='otp_send'),
     path('forgot_password/', forgot_password, name='forgot_password'),
     path('student_page_data/', student_page_data, name='student_page_data'),
     path('teacher_page_data/', teacher_page_data, name='teacher_page_data'),
-    # path('club_data/', club_data, name='club_data'),
     path('book_page_data/', book_page_data, name='book_page_data'),
     path('add_book_data/', add_book_data, name='add_book_data'),
     path('add_data/',add_data,name='add_data'),
@@ -53,6 +48,4 @@ urlpatterns = [
     path('department_data/',department_data,name='department_data'),
 
     path('verify_otp/',verify_otp,name='verify_otp'),
-
-    # path('create_pwd_function/',create_pwd_function,name='create_pwd_function'),
 ]
