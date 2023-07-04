@@ -6,7 +6,8 @@ from django.core.mail import send_mail
 from django.db.utils import IntegrityError
 from random import randint
 import os
-  
+import random
+
   
 
 
@@ -19,13 +20,23 @@ def signin_page(request):
     return render(request,'signin_page.html')
 
 def signup_page(request):
+    # send_mail(
+    #     "Testing Mail",
+    #     "Your OTP sended Successfully.",
+    #     "jaymiskin007@gmail.com",
+    #     ["miskinjay@gmail.com"],
+    #     fail_silently=False,
+    # )
     return render(request,'signup_page.html')
 
 def forgot_pwd_page(request):
     return render(request,'forgot_pwd_page.html')
 
-def otp_page(request):
-    return render(request,'otp_page.html')
+def create_pwd_page(request):
+    return render(request,'create_pwd_page.html')
+
+def verify_otp_page(request):
+    return render(request,'verify_otp_page.html')
 
 def maintenance_page(request):
     return render(request,'maintenance_page.html')
@@ -79,6 +90,8 @@ def event_page(request):
 def department_page(request):
     department_data(request) #load department data
     return render(request,'department_page.html', data)
+
+
 
 
 #club data
@@ -249,50 +262,90 @@ def password_reset(request):
     else:
         print('password does not matched.')
     return redirect(profile_page)
+    
 
-
-
-# forgot password
 def forgot_password(request):
-    print(request.POST)
-    try:
-        master = Master.objects.get(Email = request.POST['email'])
-        request.session['email'] = master.Email
-        if master.Email == request.POST['email']:
-            print('OTP Sent Successfully')
-            otp_creation(request)
-            return redirect(otp_page)
-        else:
-            print("Email Not Register")
-            return redirect(signup_page)
-    except :
-        print("invalid Email")
-        return redirect(signin_page)
+	if request.method=="POST":
+		try:
+			master = Master.objects.get(Email=request.POST['email'])
+                        
+			subject = 'OTP for forgot Password'
+			otp=random.randint(1000,9999)
+			message = f'Hi {master.Email}, Your OTP : '+str(otp)
+			email_from = settings.EMAIL_HOST_USER
+			recipient_list = [master.Email,]
+			send_mail( subject, message, email_from, recipient_list )
+			return render(request,'verify_otp.html',{'email':master.Email,'otp':otp})
+		except:
+			msg="Your are Not a register User !!!"
+			return render(request,'forgot_pwd_page.html',{'msg':msg})
+	else:
+		return render(request,'forgot_pwd_page.html')
+
+
+
+def verify_otp(request):
+	if request.method=="POST":
+		email=request.POST['email']
+		otp=request.POST['otp']
+		uotp=request.POST['uotp']
+
+		print(">>>>>>>>OTP : ",otp)
+		print(">>>>>>>>UOTP : ",uotp)
+		print(">>>>>>>>Email : ",email)
+		if uotp==otp:
+			return render(request,'create_pwd.html', {'email':email})
+		else:
+			msg="OTP Does not Matched !!!"
+			return render(request,'verify_otp.html',{'msg':msg})
+	else:
+		return render(request,'verify_otp.html')
+
+
+def create_pwd(request):
+     if request.method=="POST":
+        try:
+            master=Master.objects.get(Email = request.POST['Email'])
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>Here : ",master)
+            if request.POST['new_pwd'] == request.POST['confirm_pwd']:
+                master.Password = request.POST['new_pwd']
+                master.save()
+                return redirect(signin_page)
+            else:
+                msg="New Password & Confirm Password Does not Matched !!"
+                return render(request,'create_pwd.html',{'msg':msg})
+        except:
+            msg2="User Not Exist Please SignUp !!!"
+            return render(request,'create_pwd.html',{'msg2':msg2})
+     else:
+             return render(request,'create_pwd.html')
 
 # OTP Creation
-def otp_creation(request):
-    otp_number = randint(1000, 9999)
-    print("OTP is: ", otp_number)
-    request.session['otp'] = otp_number
-    return otp_number
+# def otp_creation(request):
+#     otp_number = randint(1000, 9999)
+#     print("OTP is: ", otp_number)
+#     request.session['otp'] = otp_number
+#     return otp_number
+
 
 #otp send
-def otp_send(request):
-    if request.session['otp'] == int(request.POST['otp']):
-        print('otp match')
-        master = Master.objects.get(Email = request.session['email'])
-        if request.POST['new_password'] == request.POST['confirm_password']:
-            master.Password = request.POST['new_password']
-            print('password change successfully')
-            master.save()
-        else:
-            print('both password should be same.')
-            return redirect(forgot_pwd_page)
-    else:
-        print('Wrong OTP')
-        return redirect(forgot_pwd_page)
-    return redirect(signin_page)
-
+# def otp_send(request):    
+#     if request.session['otp'] == int(request.POST['otp']):
+#         print('otp match')
+#         master = Master.objects.get(Email = request.session['email'])
+#         if request.POST['new_password'] == request.POST['confirm_password']:
+#             master.Password = request.POST['new_password']
+#             print('password change successfully')
+#             master.save()
+#             return redirect('signin_page')
+#         else:
+#             print('New Password & Confirm Password Does not Matched.')
+#             return redirect(forgot_pwd_page)
+#     else:
+#         print('Wrong OTP')
+#         return redirect(otp_page)
+    
+    # return redirect(signin_page)
 
 
 # profile_update_teacher
@@ -433,15 +486,3 @@ def event_data(request):
     # print(request.POST)
     event = Event.objects.all()
     data['event'] = event
-
-
-# def mail(request):  
-#     subject = "Greetings"  
-#     msg     = "Congratulations for your success"  
-#     to      = "irfan.sssit@gmail.com"  
-#     res     = send_mail(subject, msg, settings.EMAIL_HOST_USER, [to])  
-#     if(res == 1):  
-#         msg = "Mail Sent Successfuly"  
-#     else:  
-#         msg = "Mail could not sent"  
-#     return HttpResponse(msg)  

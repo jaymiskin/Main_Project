@@ -9,30 +9,20 @@ urlpatterns = [
     path('profile_data/',profile_data,name='profile_data'),
     path('profile_update/',profile_update,name='profile_update'),
     path('forgot_pwd_page/',forgot_pwd_page,name='forgot_pwd_page'),
-    path('otp_page/',otp_page,name='otp_page'),
     path('profile_page_teacher/',profile_page_teacher,name='profile_page_teacher'),
     path('student_page/',student_page,name='student_page'),
     path('teacher_page/',teacher_page,name='teacher_page'),
     path('book_page/',book_page,name='book_page'),
-
+    path('maintenance_page/',maintenance_page,name='maintenance_page'),
     path('add_club_page/',add_club_page,name='add_club_page'),
     path('add_club/',add_club,name='add_club'),
     path('club_page/',club_page,name='club_page'),
     path('update_profile_page/',update_profile_page,name='update_profile_page'),
-
     path('department_page/',department_page,name='department_page'),
     path('event_page/',event_page,name='event_page'),
 
-    path('maintenance_page/',maintenance_page,name='maintenance_page'),
 
-
-
-
-
-
-
-
-
+    path('create_pwd/',create_pwd,name='create_pwd'),
 
 
 
@@ -44,8 +34,8 @@ urlpatterns = [
     path('logout/', logout, name='logout'),
     path('signup/', signup, name='signup'),
     path('signin/', signin, name='signin'),
-    path('otp_creation/', otp_creation, name='otp_creation'),
-    path('otp_send/', otp_send, name='otp_send'),
+    # path('otp_creation/', otp_creation, name='otp_creation'),
+    # path('otp_send/', otp_send, name='otp_send'),
     path('forgot_password/', forgot_password, name='forgot_password'),
     path('student_page_data/', student_page_data, name='student_page_data'),
     path('teacher_page_data/', teacher_page_data, name='teacher_page_data'),
@@ -55,16 +45,14 @@ urlpatterns = [
     path('add_data/',add_data,name='add_data'),
     path('delete_account_function/',delete_account_function,name='delete_account_function'),
     path('update_profile_function/',update_profile_function,name='update_profile_function'),
-
     path('club_delete/<str:club_name>',club_delete,name='club_delete'),
     path('book_delete/<str:book_name>',book_delete,name='book_delete'),
-
     path('add_department/',add_department,name='add_department'),
     path('add_event/',add_event,name='add_event'),
     path('event_data/',event_data,name='event_data'),
     path('department_data/',department_data,name='department_data'),
 
+    path('verify_otp/',verify_otp,name='verify_otp'),
 
-    # path('mail',mail,name='mail') 
-
+    # path('create_pwd_function/',create_pwd_function,name='create_pwd_function'),
 ]

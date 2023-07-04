@@ -7,16 +7,17 @@
         background: black;
     }
 
+    .button_1:hover {
+        cursor: not-allowed;
+    }
+
     .mehta {
         color: white;
     }
 
     .mehta:hover {
         color: white;
-    }
-
-    .button_1:hover {
-        cursor: not-allowed;
+        cursor: pointer;
     }
 
     .button_2 {
@@ -47,28 +48,41 @@
                 </div>
                 <div class="login-right">
                     <div class="login-right-wrap">
-                        {% if error %}
-                        <p style="margin-top: 20px;margin-bottom: 30px; color: red; text-align: center;">{{error}}</p>
-                        {% else %}
-                        <p style="margin-top: 20px;margin-bottom: 30px; color: navy; text-align: center;">{{msg}}</p>
-                        {% endif %}
-                        <h1>Forgot Password</h1>
-                        <p class="account-subtitle">Enter Your Email For Forgot Password</p>
 
-                        <form method="post" action="{% url 'forgot_password' %}">
+                        <h1>Reset Password</h1>
+                        <p class="account-subtitle">Enter Your New Password</p>
+
+                        {% if error %}
+                        <p>{{error}}</p>
+                        {% else %}
+                        <p>{{msg2}}</p>
+                        {% endif %}
+
+                        <form method="post" action="{% url 'create_pwd' %}">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <label> Email <span class="login-danger">*</span></label>
-                                <input class="form-control pass-input" type="email" name="email" required>
+
+                            <input type="hidden" name="Email" value="{{email}}" />
+
+                            <fieldset class="form-group">
+                                <label> New Password <span class="login-danger">*</span></label>
+                                <input class="form-control pass-input" type="password" name="new_pwd" required>
                                 <span class="profile-views toggle-password"></span>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary btn-block" type="submit" value="Send OTP">Submit</button>
-                            </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label> Confirm Password <span class="login-danger">*</span></label>
+                                <input class="form-control pass-input" type="password" name="confirm_pwd" required>
+                                <span class="profile-views toggle-password"></span>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <button class="btn btn-primary btn-block" type="submit">Change Password</button>
+                            </fieldset>
+                            <!-- <input type="submit" value="Change Password" /> -->
+
+
                             <div class="row">
                                 <div class="form-group mb-0 col-6">
                                     <button class="btn btn-dark primary-reset btn-block button_1" type="submit"><a
-                                            class="mehta" href="{% url 'signin_page' %}">Signin</button></a>
+                                            class="mehta" href="{% url 'signin_page' %}"> Signin</button></a>
                                 </div>
                                 <div class="form-group mb-0 col-6">
                                     <button class="btn btn-primary primary-reset btn-block button_2" type="submit"><a

@@ -3,8 +3,20 @@
 {% block main_content %}
 
 <style>
+
+    .error{
+    color: #e04545;
+    margin-top: -20px;
+    font-size: 15px;
+    margin-bottom: 12px;
+    text-align: center;
+}
     .button_1 {
         background: black;
+    }
+
+    .button_1:hover {
+        cursor: not-allowed;
     }
 
     .mehta {
@@ -13,10 +25,7 @@
 
     .mehta:hover {
         color: white;
-    }
-
-    .button_1:hover {
-        cursor: not-allowed;
+        cursor: pointer;
     }
 
     .button_2 {
@@ -36,6 +45,25 @@
         color: white;
         cursor: pointer;
     }
+    /* input, .main-w{
+        padding: 10px;
+    }
+    .main-w{
+        border: none;
+        border-bottom: 10px solid goldenrod;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .main-w:hover{
+        border: 2px solid goldenrod;
+        height: 40px;
+    } */
+
+    #uniq{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
 </style>
 
 <div class="main-wrapper login-body">
@@ -47,28 +75,37 @@
                 </div>
                 <div class="login-right">
                     <div class="login-right-wrap">
-                        {% if error %}
-                        <p style="margin-top: 20px;margin-bottom: 30px; color: red; text-align: center;">{{error}}</p>
-                        {% else %}
-                        <p style="margin-top: 20px;margin-bottom: 30px; color: navy; text-align: center;">{{msg}}</p>
-                        {% endif %}
-                        <h1>Forgot Password</h1>
-                        <p class="account-subtitle">Enter Your Email For Forgot Password</p>
 
-                        <form method="post" action="{% url 'forgot_password' %}">
+                        <h1>Verify OTP</h1>
+                        <p class="account-subtitle">Enter Your New Password</p>
+                        {% if error %}
+                        <p class="error">{{error}}</p>
+                        {% else %}
+                        <p class="error">{{msg}}</p>
+                        {% endif %}
+
+                        <form method="post" action="{% url 'verify_otp' %}">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <label> Email <span class="login-danger">*</span></label>
-                                <input class="form-control pass-input" type="email" name="email" required>
+
+
+                            <fieldset>
+                                <input type="hidden" name="email" value={{email}}>
+                                <input type="hidden" name="otp" value={{otp}}>
+                            </fieldset>
+                            <fieldset>
+                                <label> OTP Verify <span class="login-danger">*</span></label>
+                                <input class="form-control pass-input" type="text" placeholder="Enter OTP" name="uotp" required/>
                                 <span class="profile-views toggle-password"></span>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary btn-block" type="submit" value="Send OTP">Submit</button>
-                            </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <button id="uniq" class="btn btn-primary btn-block" type="submit">Change Password</button>
+                            </fieldset>
+
                             <div class="row">
                                 <div class="form-group mb-0 col-6">
                                     <button class="btn btn-dark primary-reset btn-block button_1" type="submit"><a
-                                            class="mehta" href="{% url 'signin_page' %}">Signin</button></a>
+                                            class="mehta" href="{% url 'signin_page' %}"> Signin</button></a>
                                 </div>
                                 <div class="form-group mb-0 col-6">
                                     <button class="btn btn-primary primary-reset btn-block button_2" type="submit"><a
